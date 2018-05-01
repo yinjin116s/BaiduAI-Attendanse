@@ -1,5 +1,6 @@
 # BaiduAI Based Webpage Attdance System
 Version: 1.0 Final
+Author: Jin Yin
 
     Designed for teachers checking students’ attendance by using Baidu AI.
 
