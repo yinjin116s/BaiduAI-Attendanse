@@ -2,13 +2,21 @@
 Version: 1.0 Final
 
     Designed for teachers checking students’ attendance by using Baidu AI.
+
     Allowed teachers create student’s account, register student’s and teacher's picture into database.
+
     Allowed teachers create classes, register students to different classes.
+
     Allowed students present their attendance by teacher’s webcam.
+
     Allowed users to login method via username/password or webcam.
+
     Allowed teachers to check logs for the class.
+
     Allowed users to check logs of their own.
+
     Allowed users to change their own password.
+
     Identify the submission images by using Baidu AI face detection to check if the submission matches any student’s profile picture in the database. BEEN TEST AND PASSED BY USING MY OWN FACE AND THE PICTURE OF DONOLD TRUMP. 
 
 PLEASE NOTE:
