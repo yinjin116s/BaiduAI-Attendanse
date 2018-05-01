@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>CS490 Project</title>
+    <link href="./css/style.css" rel="stylesheet" />
+    <script src="./js/javascript.js"></script>
+    <script src="./picture/jquery-1.7.2.min.js"></script>
+    <script src="./picture/jquery.webcam.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var pos = 0, ctx = null, saveCB, image = [];
+            var canvas = document.createElement("canvas");
+            canvas.setAttribute('width', 320);
+            canvas.setAttribute('height', 240);
+            if (canvas.toDataURL) {
+                ctx = canvas.getContext("2d");
+                image = ctx.getImageData(0, 0, 320, 240);
+                saveCB = function(data) {
+                    var col = data.split(";");
+                    var img = image;
+                    for(var i = 0; i < 320; i++) {
+                        //转换为十进制
+                        var tmp = parseInt(col[i]);
+                        img.data[pos + 0] = (tmp >> 16) & 0xff;
+                        img.data[pos + 1] = (tmp >> 8) & 0xff;
+                        img.data[pos + 2] = tmp & 0xff;
+                        img.data[pos + 3] = 0xff;
+                        pos+= 4;
+                    }
+                    if (pos >= 4 * 320 * 240) {
+                        ctx.putImageData(img, 0, 0);
+                        $.post("./picture/upload.php", {type: "data", image: canvas.toDataURL("image/png")});
+                        pos = 0;
+                    }
+                };
+
+            } else {
+                saveCB = function(data) {
+                    image.push(data);
+                    pos+= 4 * 320;
+                    if (pos >= 4 * 320 * 240) {
+                        $.post("./picture/upload.php", {type: "pixel", image: image.join('|')});
+                        pos = 0;
+                    }
+                };
+            }
+            $("#webcam").webcam({
+                width: 320,
+                height: 240,
+                mode: "callback",
+                swffile: "./picture/jscam_canvas_only.swf",
+                onSave: saveCB,
+                onCapture: function () {
+                    webcam.save();
+                },
+                debug: function (type, string) {
+                    console.log(type + ": " + string);
+                }
+            });
+        });
+    </script>
+</head>
+
+<form id="loginform" name="login" method="post" action="php/index_process.php">
+    <table width="100%" height="620" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td colspan="3" height="150">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td width="324" height="204" align="center" valign="middle">
+                <table width="324" height="204" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <span id="title"><strong>CS491 Attendanse System</strong>
+                        <div id="webcam"></div>
+                            <strong>
+                                <input type="button" onclick="webcam.capture();alert('Please Press Enter to continue the process.. PLEASE DO NOT CLOSE THE WINDOW OR PRESS ANY BUTTON');window.location.href='./php/ai_login.php';" value="Ta--Dah" >
+                                 <input type="button" onclick="window.location.href='./index.html';" value="User/Password Login" >
+                            </strong>
+                        </span>
+                    </tr>
+                </table>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="3" height="155">&nbsp;</td>
+        </tr>
+    </table>
+</form>
