@@ -1,6 +1,7 @@
 # BaiduAI Based Webpage Attdance System
 # 基于人脸识别的校园考勤系统
 Version: 1.0 Final
+
 Author: Jin Yin | 尹进
 
     Designed for teachers checking students’ attendance by using Baidu AI.
