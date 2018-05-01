@@ -8,9 +8,9 @@ session_start();
  */
 
 require_once './AipFace.php';//Change here for ABSOLUTE ADDRESS!
-const APP_ID='BAIDU AI APP_ID';
-const API_KEY='BAIDU AI APP_KEY';
-const SECRET_KEY='BAIDU AI SECRET_KEY';
+const APP_ID='BAIDU AI APP_ID';//
+const API_KEY='BAIDU AI APP_KEY';//
+const SECRET_KEY='BAIDU AI SECRET_KEY';//
 $client = new AipFace(APP_ID, API_KEY, SECRET_KEY);
 /*
  *

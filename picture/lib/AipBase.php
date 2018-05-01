@@ -15,8 +15,8 @@
 * the License.
 */
 
-require_once '/Applications/MAMP/htdocs/CS491/picture/lib/AipHttpClient.php';
-require_once '/Applications/MAMP/htdocs/CS491/picture/lib/AipBCEUtil.php';
+require_once './lib/AipHttpClient.php';//Change Here
+require_once './lib/AipBCEUtil.php';//Change Here
 
 /**
  * Aip Base 基类
